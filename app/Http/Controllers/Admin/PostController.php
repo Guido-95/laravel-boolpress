@@ -77,7 +77,7 @@ class PostController extends Controller
         
         $post->save();
 
-        return redirect()->route('admin.posts.show' , $post->id);
+        return redirect()->route('admin.posts.show' , $post->id)->with('message', "Post creato!");
         
     }
 
@@ -117,7 +117,7 @@ class PostController extends Controller
     {
       
         $data = $request->all();
-
+        $request->validate($this->validation);
         $slug = $this->generateSlug($data);
        
         $data['slug'] = $slug;

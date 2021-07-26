@@ -6,8 +6,8 @@
         {{ session('message') }}
     </div>
     @endif
-    <button href="{{route('admin.posts.edit', $post->id)}}" class="btn btn-success mx-auto my-5 d-block">
-    Modifica</button>
+    <a href="{{route('admin.posts.edit', $post->id)}}" class="btn btn-success text-center my-5">
+    Modifica</a>
     <div class="container">
 
         <small class="text-center d-block">
