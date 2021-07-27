@@ -27,6 +27,7 @@ Route::middleware('auth')
 		// Route::get('/categories/{{category}}', 'CategoryController@show')->name('categories.show');
 	});
 
+	
 Route::get("{any?}",function(){
 	return view("guest.home");
 })->where("any", ".*");
