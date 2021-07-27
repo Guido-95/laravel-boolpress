@@ -13,6 +13,7 @@
                     <th>Id</th>
                     <th>Titolo</th>
                     <th>Slug</th>
+                    <th>Categoria</th>
                     <th colspan="3">Azioni</th>
                 </tr>
             </thead>
@@ -22,6 +23,14 @@
                         <td>{{ $item->id }}</td>
                         <td>{{ $item->title }}</td>
                         <td>{{ $item->slug }}</td>
+                        <td>
+                        @if ($item->category)
+                            {{ $item->category->name }}      
+                        {{-- @else
+                            <td>Nessuna Categoria</td>      --}}
+                          
+                        @endif
+                        </td>
                         <td > <a href="{{route ('admin.posts.show', $item->id)}}" class="btn btn-primary"> SHOW </a></td>
                         <td><a href="{{route ('admin.posts.edit', $item->id)}}" class="btn btn-success">EDIT</a> </td>
                         <td >

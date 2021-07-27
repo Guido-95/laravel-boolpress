@@ -6,12 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Post;
 use Illuminate\Support\Str;
+use App\Category;
 class PostController extends Controller
 {
 
     private $validation = [
         'title' => 'required|max:255',
         'content' => 'required',
+        'category_id'=> 'nullable|exists:categories,id',
     ];
 
     private function generateSlug($data) {
@@ -52,7 +54,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create');
+        $categories = Category::all();
+       
+        return view('admin.posts.create', compact('categories'));
     }
 
     /**
@@ -64,6 +68,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+        // dd($data);
         $request->validate($this->validation);
         $post = new Post();
         // $post->fill($data);
@@ -73,6 +78,7 @@ class PostController extends Controller
         $post->slug = $data['slug'];
         $post->title = $data['title'];
         $post->content = $data['content'];
+        $post->category_id = $data['category_id'];
         // $post->slug = Str::slug($data['title'],'-');
         
         $post->save();
@@ -102,7 +108,10 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('admin.posts.edit', compact('post'));
+
+        $categories = Category::all();
+
+        return view('admin.posts.edit', compact('post','categories'));
         
     }
 

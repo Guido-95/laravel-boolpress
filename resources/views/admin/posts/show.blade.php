@@ -6,6 +6,8 @@
         {{ session('message') }}
     </div>
     @endif
+
+    {{-- @dd($post->category); --}}
     <a href="{{route('admin.posts.edit', $post->id)}}" class="btn btn-success text-center my-5">
     Modifica</a>
     <div class="container">
@@ -16,8 +18,13 @@
     
         <h1 class="text-center">
             Titolo: {{$post->title}}
+            @if ($post->category)
+                {{-- <a href="{{route('admin.categories.show', $post->category->id)}}" class="badge badge-info">{{$post->category->name}}</a> --}}
+                <span class="badge badge-info">{{$post->category->name}}</span>
+            @else
+                <span class="badge badge-info">Nessuna Categoria</span>
+            @endif 
         </h1>  
-    
         <h2 class="text-center">
             Descrizione: {{$post->content}}
         </h2>

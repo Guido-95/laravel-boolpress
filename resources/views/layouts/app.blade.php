@@ -51,12 +51,7 @@
                         @else
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('admin.home')}}">
-                                Admin
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('admin.posts.create')}}">
-                                Aggiungi Post
+                              <strong>Admin</strong>  
                             </a>
                         </li>
 
@@ -65,6 +60,20 @@
                                 Lista Post
                             </a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('admin.posts.create')}}">
+                                Aggiungi Post
+                            </a>
+                        </li>
+
+                        {{-- <li class="nav-item">
+                            <a class="nav-link" href="{{route('admin.categories.show')}}">
+                                Lista Categorie
+                            </a>
+                        </li> --}}
+
+                        
                         
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
