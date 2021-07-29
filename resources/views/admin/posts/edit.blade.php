@@ -53,7 +53,6 @@
           
                 <div class="form-check d-inline-block mb-3 mr-4">
                     @if ($errors->any())
-                   
                         <input class="form-check-input" name="tags[]" type="checkbox" id="tag-{{ $tag->id }}" value="{{ $tag->id }}"
                         {{ in_array($tag->id, old('tags', [])) ? 'checked' : '' }}
                         >
@@ -62,7 +61,6 @@
                         {{ $post->tags->contains($tag->id) ? 'checked' : '' }}
                         > 
                     @endif
-                  
                     <label class="form-check-label" for="tag-{{$tag->id}}">
                         {{$tag->name}}
                     </label>
