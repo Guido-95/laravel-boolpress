@@ -9,9 +9,9 @@ use App\Category;
 
 class CategoryController extends Controller
 {
-    public function show(Category $prova){
+    public function show(Category $category){
 
-        return view('admin.categories.show', compact('prova'));
+        return view('admin.categories.show', compact('category'));
         
     }
 }

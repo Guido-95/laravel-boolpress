@@ -35,7 +35,35 @@
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
         </div>
+        <div class="form-group">
+            <h5 for="category_id">Tag</h5>   
+            @foreach ($tags as $tag)
+                <div class="form-check d-inline-block mb-3 mr-4">
+                    @if ($errors->any())
+                        <input class="form-check-input" type="checkbox" name="tags[]" value="{{$tag->id}}" id="tag-{{$tag->id}}"
+                        {{in_array($tag->id,old('tags')) ? 'checked' : ''}}>
+                        <label class="form-check-label" for="tag-{{$tag->id}}">
+                            {{$tag->name}}
+                        </label>
+                       
+                    @else
+                    <input class="form-check-input" type="checkbox" name="tags[]" value="{{$tag->id}}" id="tag-{{$tag->id}}">
+                    <label class="form-check-label" for="tag-{{$tag->id}}">
+                        {{$tag->name}}
+                    </label>
+                    @endif
+                </div>
+            @endforeach
+            @error('tags')   
+                <div>
+                    <small class="text-danger">{{ $message }}</small>
+                </div>     
+            @enderror
+        </div>        
+         
+         
         
-        <button type="submit" class="btn btn-primary">Salva</button>
+        <button type="submit" class="btn btn-primary d-block">Salva</button>
+        
     </form>
 @endsection

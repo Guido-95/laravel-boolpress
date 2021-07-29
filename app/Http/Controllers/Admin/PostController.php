@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Post;
 use Illuminate\Support\Str;
 use App\Category;
+use App\Tag;
 class PostController extends Controller
 {
 
@@ -14,6 +15,7 @@ class PostController extends Controller
         'title' => 'required|max:255',
         'content' => 'required',
         'category_id'=> 'nullable|exists:categories,id',
+        'tags'=>'exists:tags,id'
     ];
 
     private function generateSlug($data) {
@@ -55,8 +57,8 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::all();
-       
-        return view('admin.posts.create', compact('categories'));
+        $tags = Tag::all();
+        return view('admin.posts.create', compact('categories','tags'));
     }
 
     /**
@@ -68,7 +70,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        // dd($data);
+        
         $request->validate($this->validation);
         $post = new Post();
         // $post->fill($data);
@@ -81,7 +83,13 @@ class PostController extends Controller
         $post->category_id = $data['category_id'];
         // $post->slug = Str::slug($data['title'],'-');
         
+        
         $post->save();
+
+        
+        if (array_key_exists('tags',$data)) {
+            $post->tags()->attach($data["tags"]);
+        };
 
         return redirect()->route('admin.posts.show' , $post->id)->with('message', "Post creato!");
         
@@ -110,8 +118,8 @@ class PostController extends Controller
     {
 
         $categories = Category::all();
-
-        return view('admin.posts.edit', compact('post','categories'));
+        $tags = Tag::all();
+        return view('admin.posts.edit', compact('post','categories','tags'));
         
     }
 
@@ -132,7 +140,13 @@ class PostController extends Controller
         $data['slug'] = $slug;
 
         $post->update($data);
-       
+        
+        if (array_key_exists('tags',$data)) {
+            $post->tags()->sync($data["tags"]);
+        }else {
+            $post->tags()->detach();
+        }
+
         return redirect()->route("admin.posts.show",$post)
             ->with('message', "Post '" . " " . $post->title . "' modificato correttamente");
     }
