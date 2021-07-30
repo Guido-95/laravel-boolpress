@@ -35,10 +35,10 @@
                     @foreach ($categories as $item)
                         <option value="{{$item->id}}"  
 
-                        {{($item->id == old('category_id', $post->category->id)) ? 'selected' : ''}} 
-                        >
-                        
-                        {{$item->name}} </option>
+                            {{($item->id == old('category_id', $post->category_id)) ? 'selected' : ''}} >
+                            
+                            {{$item->name}} 
+                        </option>
                     @endforeach
                     
             </select>
