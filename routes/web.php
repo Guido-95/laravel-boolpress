@@ -30,7 +30,5 @@ Route::middleware('auth')
 	});
 
 
-Route::get("{any?}",function(){
-	return view("guest.home");
-})->where("any", ".*");
+Route::get("{any?}","HomeController@index")->where("any", ".*")->name('home');
 // Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');

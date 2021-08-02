@@ -19,16 +19,7 @@ Route::namespace('Api')
     ->group(function() {
 
         Route::get('posts', 'PostController@index');
-
+        Route::get('posts/{slug}', 'PostController@show');
     });
 
-    Route::get('/test', function() {
-        return response()->json(
-            [
-                "firstname" => "Gianluca",
-                "lastname" => "Pesce",
-                "age" => 38
-            ]
-        );
-    });
-    
+  

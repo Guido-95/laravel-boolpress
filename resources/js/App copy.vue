@@ -2,9 +2,10 @@
 <div>
     <Header />
     <main>
-       
-       
-        <router-view></router-view>
+        <div class="container">
+           
+            
+        </div>
 
     </main>
     <Footer/>
@@ -14,12 +15,14 @@
 
 <script>
 import Header from './components/Header';
+import Card from './components/Card';
 import Footer from './components/Footer';
 
 export default {
     name: 'App',
     components:{
         Header,
+        Card,
         Footer,
     },
     data(){
@@ -34,13 +37,12 @@ export default {
         postsChangePage(page = 1){
             axios
                 .get('http://127.0.0.1:8000/api/posts?page=' + page)
-                .then(
-                    res => {
+                .then(res => {
                     this.posts = res.data.data;
                     this.current_page = res.data.current_page;
                     this.last_page = res.data.last_page;
-                    // console.log( res.data); 
-                    // console.log(this.current_page);
+                    console.log( res.data); 
+                    console.log(this.current_page);
                     
                 })
                 .catch(
@@ -61,8 +63,14 @@ export default {
 </script>
 
 <style lang="scss">
-     .loading {
-        margin: 100px;
+    main{
+        
+        background: lightblue;
+    }
+    .buttons{
+       margin: 50px;
+        width: 100%;
+      
         text-align: center;
     }
 </style>

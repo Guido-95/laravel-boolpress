@@ -2,7 +2,9 @@
     <div class="card">
        <h4>{{post.title}}</h4> 
        <p> {{post.content.substring(0,100) + '...'}}</p>
-         <a href="#" >Continua a leggere</a>
+         <!-- <a href="#" >Continua a leggere</a> -->
+         <router-link :to="{name:'single-post' , params:{slug:post.slug}}">Clicca per continuare a leggere</router-link>
+         
     </div>
 </template>
 

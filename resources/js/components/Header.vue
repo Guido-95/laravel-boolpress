@@ -2,19 +2,18 @@
     <header class="container ">
         <ul>
             <li>
-                <a href="">
-                    Home
-                </a>
+                <!-- use router-link component for navigation. -->
+                <!-- specify the link by passing the `to` prop. -->
+                <!-- `<router-link>` will be rendered as an `<a>` tag by default -->
+                <router-link :to="{name:'home'}">Home</router-link>
             </li>
-             <li>
-                <a href="">
-                    Posts
-                </a>
+            <li>
+             
+                <router-link :to="{name:'blog'}">Blog</router-link>
             </li>
-             <li>
-                <a href="">
-                    Chi siamo
-                </a>
+            <li>
+              
+                <router-link :to="{name:'about'}">Chi siamo</router-link>
             </li>
         </ul>
     </header>
@@ -36,8 +35,18 @@ export default {
         li{
             font-size: 20px;
             margin: 10px;
-            a{
+             a {    
+                display: inline-block;
+                padding: 5px 10px;
+                color: black;
+                font-size: 18px;
                 text-decoration: none;
+
+                &.active,
+                &:hover {
+                    text-decoration: none;
+                    background-color: lightblue;
+                }
             }
         }
     }
