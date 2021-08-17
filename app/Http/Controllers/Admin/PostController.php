@@ -4,18 +4,27 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
+
 use App\Post;
 use Illuminate\Support\Str;
 use App\Category;
 use App\Tag;
 class PostController extends Controller
 {
-
+    // errore personalizazto da mettere nel validate come secondo argomento
+    // private $errore= [
+    //     'title.required' =>'errore personalizzato'
+    // ];
+    
     private $validation = [
         'title' => 'required|max:255',
         'content' => 'required',
         'category_id'=> 'nullable|exists:categories,id',
-        'tags'=>'exists:tags,id'
+        'tags'=>'exists:tags,id',
+        'cover'=>'nullable|mimes:jpg,jpeg|max:2048'
+        // 'cover' => 'nullable|image|max:2048'
     ];
 
     private function generateSlug($data) {
@@ -70,17 +79,25 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        
-        $request->validate($this->validation);
+        // dd($data);
+        $request->validate($this->validation); 
+        // $this->messaggi da mettere nel validate per errore personalizzato
         $post = new Post();
         // $post->fill($data);
         
         $slug = $this->generateSlug($data);
         $data['slug'] = $slug;
-        $post->slug = $data['slug'];
-        $post->title = $data['title'];
-        $post->content = $data['content'];
-        $post->category_id = $data['category_id'];
+
+        if(array_key_exists('cover',$data)){
+            // $post->cover = Storage::put('post_covers',$data['cover']);
+  
+            $data["cover"] = Storage::put('post_covers', $data["cover"]);
+
+        };
+
+        
+        $post->fill($data);
+       
         // $post->slug = Str::slug($data['title'],'-');
         
         
@@ -139,6 +156,15 @@ class PostController extends Controller
        
         $data['slug'] = $slug;
 
+
+        if(array_key_exists('cover', $data)){
+            if($post->cover){
+                Storage::delete($post->cover);
+            }
+            $data['cover'] = Storage::put('post_covers',$data['cover']);
+            
+        }
+
         $post->update($data);
         
         if (array_key_exists('tags',$data)) {
@@ -159,6 +185,12 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        if($post->cover){
+            Storage::delete($post->cover);
+            
+        }
+
+
         $post->delete();
         
         return redirect()

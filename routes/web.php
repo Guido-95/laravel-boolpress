@@ -13,9 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-
 Auth::routes();
+
 
 Route::middleware('auth')
     ->prefix('admin')
@@ -26,9 +25,10 @@ Route::middleware('auth')
         Route::resource('posts', 'PostController');
 		Route::get('/categories/{category}', 'CategoryController@show')->name('categories.show');
 		Route::get('/tag/{tag}', 'TagController@show')->name('tag.show');
-		
+		Route::get('/leads','UsersController@index')->name('leads');
+		Route::get('/tag/{tag}', 'TagController@show')->name('tag.show');
+		Route::get("{any?}","HomeController@index")->where("any", ".*")->name('home');
 	});
-
 
 Route::get("{any?}","HomeController@index")->where("any", ".*")->name('home');
 // Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');

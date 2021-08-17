@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <form class="create-edit container" action="{{route('admin.posts.store')}}" method="POST">
+    <form class="create-edit container" action="{{route('admin.posts.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('POST')
         <div class="form-group">
@@ -41,7 +41,7 @@
                 <div class="form-check d-inline-block mb-3 mr-4">
                     @if ($errors->any())
                         <input class="form-check-input" type="checkbox" name="tags[]" value="{{$tag->id}}" id="tag-{{$tag->id}}"
-                        {{in_array($tag->id,old('tags')) ? 'checked' : ''}}>
+                        {{in_array($tag->id,old('tags',[])) ? 'checked' : ''}}>
                         <label class="form-check-label" for="tag-{{$tag->id}}">
                             {{$tag->name}}
                         </label>
@@ -59,7 +59,19 @@
                     <small class="text-danger">{{ $message }}</small>
                 </div>     
             @enderror
-        </div>        
+        </div>    
+        
+        
+        <div class="form-group">
+            <label for="cover">Inserisci una copertina</label>
+            <input type="file" name ='cover' class="form-control-file" id="cover">
+           
+        </div>
+        @error('cover')   
+            <div>
+                <small class="text-danger">{{ $message }}</small>
+            </div>     
+        @enderror
          
          
         

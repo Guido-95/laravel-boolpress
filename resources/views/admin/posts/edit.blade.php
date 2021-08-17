@@ -6,7 +6,7 @@
             {{ session('message') }}
         </div>
     @endif 
-    <form class="create-edit container " action="{{route('admin.posts.update' ,$post->id)}}" method="POST">
+    <form class="create-edit container " action="{{route('admin.posts.update' ,$post->id)}}" method="POST"  enctype="multipart/form-data">
         @csrf
         @method('PATCH')
         <div class="form-group">
@@ -20,7 +20,7 @@
         <div class="form-group">
 
             <label for="content">Descrizione</label>
-            <textarea type="text" name="content"  class="form-control @error('content') is-invalid @enderror" id="content" placeholder="Inserisci informazioni sull'articolo">{{old('content',$post->content)}}
+            <textarea type="text" name="content"  class="form-control @error('content') is-invalid @enderror" id="content" placeholder="Inserisci informazioni sull'articolo" rows="5">{{old('content',$post->content)}}
             </textarea>
             @error('content')        
                 <small class="text-danger">{{ $message }}</small>
@@ -71,7 +71,27 @@
                     <small class="text-danger">{{ $message }}</small>
                 </div>     
             @enderror
-        </div>        
+        </div>
+        <div class="form-group">
+            <label for="cover">Inserisci immagine di copertina </label>
+           
+            <input type="file" name ='cover' class="form-control-file" id="cover">
+           
+        </div>
+
+        @if ($post->cover)
+        <div class="img-edit mt-5 mb-4 w-25 ">
+            
+            <img class="img-fluid rounded" src="{{asset('storage/' . $post->cover)}}" alt="immagine prefedinita">
+        </div>
+        @endif
+
+        @error('cover')   
+            <div>
+                <small class="text-danger">{{ $message }}</small>
+            </div>     
+        @enderror
+            
         
         <button type="submit" class="btn btn-primary">Salva</button>
     </form>

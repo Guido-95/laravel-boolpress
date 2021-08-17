@@ -45,10 +45,26 @@
                 </h3>
             @endforeach
         </div>
-        <h2 class="text-center">
-            Descrizione: {{$post->content}}
-        </h2>
-        <h4 class="text-center">
+        <div class="row mt-4">
+            <div class="col-md-6">
+                @if ($post->cover)
+                    <div class="text-center">
+                        <img class="img-fluid" src="{{asset('storage/' . $post->cover)}}" alt="{{$post->title}}">
+                    </div>
+                @else
+                    <img class="img-fluid" src="{{asset('images/placeholder.png')}}" alt="immagine prefedinita">
+
+                @endif
+            </div>
+            <div class="col-md-6">
+                <h4 >
+                    {{$post->content}}
+                </h4>
+            </div>
+           
+        </div>
+        
+        <h4 class="text-center mt-5">
             Slug:{{$post->slug}}
         </h4>
     </div>

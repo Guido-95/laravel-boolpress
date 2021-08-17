@@ -49,39 +49,39 @@
                                 </li>
                             @endif
                         @else
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('admin.home')}}">
-                              <strong>Admin</strong>  
-                            </a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('admin.home')}}">
+                                <strong>Admin</strong>  
+                                </a>
+                            </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('admin.posts.index')}}">
-                                Lista Post
-                            </a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('admin.posts.index')}}">
+                                    Lista Post
+                                </a>
+                            </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('admin.posts.create')}}">
-                                Aggiungi Post
-                            </a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('admin.posts.create')}}">
+                                    Aggiungi Post
+                                </a>
+                            </li>
 
-                        {{-- <li class="nav-item">
-                            <a class="nav-link" href="{{route('admin.categories.show', 3)}}">
-                                Lista Categorie
-                            </a>
-                        </li>
-                         --}}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('admin.leads')}}">
+                                    Lista messaggi
+                                </a>
+                            </li>
+
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{Auth::user()->name}}
                                 </a>
-                               
+                                
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                        onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 

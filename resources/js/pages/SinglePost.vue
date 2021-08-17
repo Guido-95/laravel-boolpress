@@ -7,16 +7,19 @@
                     <a  href="" class="badge badge-info ">{{post.category.name}}</a>
                 </span>
                 <span v-if=" post.tags.length > 0">
-                    <a href="" class="badge badge-secondary mx-2" v-for="tag in post.tags" :key="tag.id">{{tag.name}}</a>
+                    <a href="" class="badge badge-secondary mx-2" v-for="tag in post.tags" :key="'tag-' + tag.id">{{tag.name}}</a>
                 </span>
                 <NotFound v-if=" !post.id" />
             </h3>
-            
+
+            <img class="img-fluid w-50" :src="post.cover" :alt="post.title">
+
             <p>
                 {{post.content}}
                 
             </p>
-            <router-link class="btn btn-primary" :to="{name: 'blog'}"></router-link>
+            <router-link class="btn btn-primary" :to="{name: 'blog'}">Blog</router-link>
+         
         </div>
         <div v-else >
             <h2 class="loading">loading...</h2>
@@ -29,6 +32,7 @@
 <script>
 import NotFound from '../components/NotFound.vue';
 export default {
+    
     name:"SinglePost",
       components:{
         NotFound,
